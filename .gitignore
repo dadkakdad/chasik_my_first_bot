@@ -26,6 +26,10 @@ wheels/
 # Environment variables
 .env
 
+# Bot data
+sessions.json
+product_brief_*.md
+
 # IDE
 .vscode/
 .idea/
