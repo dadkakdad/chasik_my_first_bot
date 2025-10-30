@@ -39,8 +39,31 @@ session_manager = SessionManager()
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """Send welcome message when /start is issued"""
-    await update.message.reply_text(WELCOME_MESSAGE)
-    logger.info(f"User {update.effective_user.id} started the bot")
+    # Get user's first name
+    user_name = update.effective_user.first_name
+    
+    # Personalize welcome message
+    personalized_message = f"""👋 Привет, {user_name}! Я — Product Manager Bot для Яндекс Лавки.
+
+Помогаю превращать сырые идеи фич в проработанные требования через умные вопросы.
+
+**Как работаю:**
+• Задаю уточняющие вопросы о твоей идее
+• Помогаю продумать зачем, кому и как
+• Генерирую структурированный бриф с требованиями
+
+**Команды:**
+/newtask — начать обсуждение новой фичи
+/generate — сгенерировать документ (доступно после диалога)
+/cancel — отменить текущую сессию
+/help — показать эту справку
+
+Можешь писать текстом или отправлять голосовые сообщения 🎤
+
+Готов начать? Отправь /newtask и опиши свою идею!"""
+    
+    await update.message.reply_text(personalized_message)
+    logger.info(f"User {update.effective_user.id} ({user_name}) started the bot")
 
 
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
